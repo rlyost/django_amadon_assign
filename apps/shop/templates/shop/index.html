@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    {% load static %}
   <title>Amadon Store!</title>
   <link rel='stylesheet' href="{% static 'css/shop/shop.css' %}" media="screen" title="no title" charset="utf-8">
 </head>
@@ -14,19 +15,20 @@
             <th>Quantity</th>
             <th>Actions</th>
         </tr>
-        {% for item in all_items: %}
+        {% for item in request.session.shop %}
             <tr>
-                <td>{{ item['item'] }}</td>
-                <td>{{ item['price'] }}</td>
+                <td>{{ item.item }}</td>
+                <td>{{ item.price }}</td>
                 <td>
                     <form action='/buy' method='post'>
                     {% csrf_token %}
                     <select name='quantity'>
+                    <option>0</option>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
                     </select>
-                    <input type='hidden' name='{{ item['product_id'] }}' value='{{ item['product_id'] }}' />
+                    <input type='hidden' name='product_id' value='{{ item.product_id }}' />
                 </td>
                 <td><input type='submit' value='Buy!' /></td>
                 </form>

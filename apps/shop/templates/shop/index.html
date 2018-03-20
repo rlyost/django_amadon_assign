@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Amadon Store!</title>
+  <link rel='stylesheet' href="{% static 'css/shop/shop.css' %}" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+    <h1>Amadon Store!</h1>
+    <!-- with all the data we can then construct a more structured output -->
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+        </tr>
+        {% for item in all_items: %}
+            <tr>
+                <td>{{ item['item'] }}</td>
+                <td>{{ item['price'] }}</td>
+                <td>
+                    <form action='/buy' method='post'>
+                    {% csrf_token %}
+                    <select name='quantity'>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    </select>
+                    <input type='hidden' name='{{ item['product_id'] }}' value='{{ item['product_id'] }}' />
+                </td>
+                <td><input type='submit' value='Buy!' /></td>
+                </form>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td class='tbl_bot'></td>
+            <td class='tbl_bot'></td>
+            <td class='tbl_bot'></td>
+            <td class='tbl_bot'></td>
+        </tr>
+
+    </table>
+</body>
+</html>

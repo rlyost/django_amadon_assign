@@ -1,0 +1,12 @@
+<html>
+<head>
+  <title>Amadon Checkout</title>
+  <link rel='stylesheet' href="{% static 'css/shop/shop.css' %}" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+    <h1>Thank you for your business!</h1>
+    <p>We charged your credit card for ${{ request.session['context'][0] }}.</p>
+    <p>You have ordered {{ request.session['context'][1] }} items so far and spent ${{ request.session['context'][2] }} with Amadon.com!</p>
+    <a href="/">Go back</a>
+</body>
+</html>
